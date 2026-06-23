@@ -59,7 +59,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         // Permitir conexiones explícitas desde tu entorno de desarrollo local y tus despliegues en Vercel
-        config.setAllowedOrigins(List.of("http://localhost:3000", "https://*.vercel.app"));
+        //config.setAllowedOrigins(List.of("http://localhost:3000", "https://*.vercel.app"));
+        // CORRECCIÓN: Usamos patrones permitidos para soportar el subdominio de Vercel y mantener localhost funcional
+        config.setAllowedOriginPatterns(List.of(
+            "http://localhost:3000", 
+            "https://uqai-intranet.vercel.app",
+            "https://*-armando-intranet.vercel.app"
+        ));
+
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         // CRÍTICO: Permitir el intercambio seguro de Cookies HttpOnly cross-site
