@@ -6,7 +6,8 @@ import LeadsTable from "./LeadsTable";
 // Función del lado del servidor para comunicarse de forma segura con Spring Boot
 async function getLeads(token: string) {
   try {
-    const res = await fetch("http://localhost:8080/api/leads", {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+    const res = await fetch(`${baseUrl}/api/leads`, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store", // Evita que se cacheen los datos de auditoría (OWASP A04)
     });

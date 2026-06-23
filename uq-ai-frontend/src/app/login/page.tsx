@@ -24,7 +24,9 @@ export default function LoginPage() {
 
     try {
       // 1. Pedir token de acceso al backend de Java en el puerto 8080
-      const response = await axios.post("http://localhost:8080/api/auth/login", form);
+      //const response = await axios.post("http://localhost:8080/api/auth/login", form);
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+        const response = await axios.post(`${baseUrl}/api/auth/login`, form);
       const { token, rol } = response.data;
 
       // 2. Guardar JWT en cookie HttpOnly usando nuestro Route Handler de Next.js
