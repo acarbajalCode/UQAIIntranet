@@ -17,7 +17,7 @@
 | :--- | :--- | :--- |
 | **Frontend (Next.js)** | Despliegue en Producción | [Visitar Aplicación en Vercel](https://uqai-intranet.vercel.app/) |
 | **Código Fuente** | Repositorio Público | [Ver en GitHub](https://github.com/acarbajalCode/UQAIIntranet.git) |
-| **Demostración** | Video Explicativo | [Ver Video de Sustentación]((https://drive.google.com/file/d/1h0W47LA_nGurJNpNZNC3D5mCXnA65-en/view?usp=sharing)) |
+| **Demostración** | Video Explicativo | [Ver Video de Sustentación](https://drive.google.com/file/d/1h0W47LA_nGurJNpNZNC3D5mCXnA65-en/view?usp=sharing) |
 
 ---
 
