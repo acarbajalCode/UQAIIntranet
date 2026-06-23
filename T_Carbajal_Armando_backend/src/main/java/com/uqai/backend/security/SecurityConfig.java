@@ -30,16 +30,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-            // 1. Desactivar CSRF ya que la autenticación mediante JWT es stateless y se usa tokens alternos
-            .csrf(AbstractHttpConfigurer::disable)
+            // 1. Modificación: Desactivar CSRF de forma explícita ignorando h2-console
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/h2-console/**")
+                .disable()
+            )
             // 2. Acoplar la configuración de orígenes cruzados (CORS)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             // 3. Declarar la política de sesiones como totalmente SIN ESTADO (Stateless)
-            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            // NOTA: Para h2-console requerimos permitir creación de sesión local interna
+            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             // 4. Configurar el control de accesos a los endpoints (RBAC)
             .authorizeHttpRequests(auth -> auth
                 // Rutas públicas de autenticación y consola H2 de desarrollo
-                .requestMatchers("/api/auth/**", "/h2-console/**").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 // Permitir que cualquier visitante de la landing page envíe un lead de contacto
                 .requestMatchers(HttpMethod.POST, "/api/leads").permitAll()
                 // Rutas restringidas exclusivamente para usuarios con Rol de Administrador
