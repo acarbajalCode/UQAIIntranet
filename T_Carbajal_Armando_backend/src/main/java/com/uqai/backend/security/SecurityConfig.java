@@ -69,7 +69,8 @@ public class SecurityConfig {
         config.setAllowedOriginPatterns(List.of(
             "http://localhost:3000", 
             "https://uqai-intranet.vercel.app",
-            "https://*-armando-intranet.vercel.app"
+            "https://*-armando-intranet.vercel.app",
+            "https://uqaiintranet-production.up.railway.app"
         ));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
